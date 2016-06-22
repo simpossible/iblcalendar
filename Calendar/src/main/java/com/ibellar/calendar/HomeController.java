@@ -44,10 +44,6 @@ public class HomeController {
 		
 		System.out.println(service);
 		
-		IBLUser u = new IBLUser();
-		u.setUid(1);
-		service.saveUser(u);
-		
 		return "home";
 	}
 	

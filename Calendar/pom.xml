@@ -118,6 +118,18 @@
 			<version>20030825.183949</version>
 		</dependency>
 
+
+<!-- json 处理 -->
+		<dependency>  
+		    <groupId>org.codehaus.jackson</groupId>  
+		    <artifactId>jackson-core-asl</artifactId>  
+ 		   <version>1.8.4</version>  
+		</dependency>  
+		<dependency>  
+ 		   <groupId>org.codehaus.jackson</groupId>  
+ 		   <artifactId>jackson-mapper-asl</artifactId>  
+ 		   <version>1.8.4</version>  
+		</dependency>  
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
