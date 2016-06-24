@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>登录</title>
 </head>
-<form action="http://localhost:8080/calendar/login_param" method="POST">
+<form action="http://localhost:8080/calendar/login_email_param" method="POST">
     <input type="text" width="300px" height="100px" value="用户名" name="uid">
     <br>
     <input type="text" width="300px" height="100px" value="密码" name="passwd">

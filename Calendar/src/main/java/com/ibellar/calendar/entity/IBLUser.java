@@ -1,5 +1,6 @@
 package com.ibellar.calendar.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -11,8 +12,10 @@ public class IBLUser {
 	
 	private String passwd;
 	
+	@Column(unique = true,nullable  = false)
 	private String email;
 	
+	@Column(unique = true,nullable  = true)
 	private String telNumber;//电话好号码
 	
 	private String nickName;

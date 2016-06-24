@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ibellar.calendar.dao.IBLUserDao;
 import com.ibellar.calendar.entity.IBLUser;
 
+@Transactional
 @EnableTransactionManagement
 @Service
 public class IBLUserService {
@@ -15,7 +16,7 @@ public class IBLUserService {
 	@Autowired
 	private IBLUserDao dao;
 	
-	@Transactional
+	
 	public void saveUser(IBLUser u)
 	{
 		dao.saveUser(u);		

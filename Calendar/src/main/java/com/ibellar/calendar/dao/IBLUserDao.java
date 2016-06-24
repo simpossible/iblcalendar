@@ -12,25 +12,34 @@ import com.ibellar.calendar.entity.IBLUser;
 @Repository
 public class IBLUserDao {
 	@Autowired
-    private SessionFactory sessionFactory;
+	private SessionFactory sessionFactory;
 
 	public void saveUser(IBLUser u) {
 		sessionFactory.getCurrentSession().save(u);
-		System.out.println(sessionFactory+"121212");
+		System.out.println(sessionFactory + "121212");
 	}
-	
+
 	public void deleteUser(IBLUser u) {
 		sessionFactory.getCurrentSession().delete(u);
 	}
-	
+
+	/**
+	 * 
+	 * @param email
+	 * @return
+	 */
 	public IBLUser quearyUserWithEmail(String email) {
-		String hql = "from IBLUser as IBLUser where user.email=:name";
+
+		String hql = "from IBLUser as user where user.email=?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setString("name", email);
-		
+		query.setString(0, email);
+
 		List<IBLUser> list = query.list();
-		
+
+		if (list == null || list.size() == 0) {
+			return null;
+		}
 		return list.get(0);
-		
+
 	}
 }

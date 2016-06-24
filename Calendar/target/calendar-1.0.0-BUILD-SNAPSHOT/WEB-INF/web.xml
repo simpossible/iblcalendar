@@ -30,6 +30,8 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+	
+	
 
 	<!-- <filter>
 		<filter-name>SpringOpenSessionInViewFilter</filter-name>

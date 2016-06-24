@@ -21,7 +21,7 @@
 		<!-- maven自己官方仓库 -->
 		<repository>
 			<id>maven</id>
-			<name>Maven Repository Switchboard</name>
+			<name>Maven Repository Switchboard      </name>
 			<layout>default</layout>
 			<url>http://repo1.maven.org/maven2</url>
 			<snapshots>

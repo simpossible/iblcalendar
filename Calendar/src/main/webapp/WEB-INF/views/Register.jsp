@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <title>11</title>
 </head>
-<form action="http://localhost:8080/calendar/login_param" method="post">
+<form action="http://localhost:8080/calendar/register_email_param" method="POST">
     <input type="text" width="300px" height="100px" value="邮箱" name="email">
     <br>
-    <input type="text" width="300px" height="100px" value="密码" name="pw">
+    <input type="text" width="300px" height="100px" value="密码" name="passwd">
 
     <input type="submit">
 </form>
