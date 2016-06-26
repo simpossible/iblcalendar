@@ -3,6 +3,8 @@ package com.ibellar.calendar;
 
 
 public class IBLErrorCode {
+	
+	public final static int ALL_OK = 603;
 	public final static int ACCOUNT_DOES_NOT_EXIST = 1001;
 	public final static int ACCOUNT_PASS_EROOR = 1002;
 	public final static int ACCOUNT_FORMAT_ERROR = 1003;

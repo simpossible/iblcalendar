@@ -5,7 +5,9 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.ibellar.calendar.IBLErrorCode;
 import com.ibellar.calendar.IBLException;
 import com.ibellar.calendar.entity.IBLUser;
 import com.ibellar.calendar.service.LoginServerce;
@@ -30,9 +34,9 @@ public class LoginController {
 	}
 	
 	
-	@RequestMapping(value = "/login_email_param", method = RequestMethod.POST)
+	@RequestMapping(value = "/login_email_param", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public Map<String,Object> loginwithparam(HttpServletRequest request) throws Exception {
+	public String loginwithparam(HttpServletRequest request) throws Exception {
 		
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("passwd");
@@ -42,14 +46,18 @@ public class LoginController {
 			IBLUser user = service.loginWithEmail(email, passwd);
 			map.put("email", user.getEmail());
 			map.put("nickName", user.getNickName());
-			
+
+	        map.put("code", IBLErrorCode.ALL_OK); 
 		} catch (IBLException e) {
 			// TODO: handle exception
+
+	        map.put("code", e.getErrorcode());
+	        map.put("error", e.getErrorMessage());
 		}
-		 
-        map.put("code", true); 
-        System.out.println(map);
-		return map;
+//       
+        Gson json = new Gson();
+        String jj = json.toJson(map);
+		return jj;
 	}
 	
 }

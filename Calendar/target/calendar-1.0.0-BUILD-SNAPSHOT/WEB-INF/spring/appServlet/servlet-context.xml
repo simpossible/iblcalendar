@@ -57,5 +57,5 @@
 		<beans:property name="sessionFactory" ref="sessionFactory" />
 	</beans:bean>
 
-	<context:component-scan base-package="com.ibellar.calendar" />
+	<context:component-scan base-package="com.ibellar.calendar.*" />
 </beans:beans>
