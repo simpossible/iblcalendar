@@ -16,7 +16,6 @@ public class IBLUserDao {
 
 	public void saveUser(IBLUser u) {
 		sessionFactory.getCurrentSession().save(u);
-		System.out.println(sessionFactory + "121212");
 	}
 
 	public void deleteUser(IBLUser u) {
