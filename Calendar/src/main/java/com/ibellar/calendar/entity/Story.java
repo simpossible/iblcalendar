@@ -19,6 +19,9 @@ public class Story {
 	
 	private int historyId;
 	
+	private Integer creatorId;
+	
+
 	/**
 	 * 创建的时间
 	 */
@@ -76,6 +79,14 @@ public class Story {
 
 	public void setDate(long date) {
 		this.date = date;
+	}
+
+	public Integer getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(Integer creatorId) {
+		this.creatorId = creatorId;
 	}
 
 

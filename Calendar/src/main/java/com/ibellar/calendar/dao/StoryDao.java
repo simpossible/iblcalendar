@@ -40,4 +40,17 @@ public class StoryDao {
 		List<Story> list = query.list();
 		return list;
 	}
+	
+	public Integer qureyNumberOfStoryInHistoryId(Integer hid) {
+		String hql  = "from Story as story where story.historyId=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, hid);
+		List<Story> list = query.list();
+		return list.size();
+	}
+	
+	public List<Story> queryStoryOfUser(Integer uid) {
+		String hql = "from Story as story where story.c";
+	}
+
 }

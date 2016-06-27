@@ -25,6 +25,12 @@ public class IBLUser {
 
 	private Boolean isActive;//是否已经激活 邮件激活
 	
+	//鉴权的token
+	private String accessToken;
+	
+	//邮件找回 激活的token
+	private String emailToken;
+	
 	public int getUid() {
 		return uid;
 	}
@@ -71,6 +77,22 @@ public class IBLUser {
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public String getEmailToken() {
+		return emailToken;
+	}
+
+	public void setEmailToken(String emailToken) {
+		this.emailToken = emailToken;
 	}
 	
 	
