@@ -2,6 +2,8 @@ package com.ibellar.calendar.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import com.ibellar.calendar.entity.IBLUser;
 
@@ -9,6 +11,7 @@ import com.ibellar.calendar.entity.IBLUser;
 public class History {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int historyId;
 	
 	@Column(unique = true,nullable  = false)
@@ -17,6 +20,9 @@ public class History {
 	private String summary;
 	
 	private int creatorId;
+	
+	private long createTime;
+	
 
 	public int getHistoryId() {
 		return historyId;
@@ -48,6 +54,14 @@ public class History {
 
 	public void setCreatorId(int creatorId) {
 		this.creatorId = creatorId;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
 	}
 
 

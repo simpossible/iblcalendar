@@ -15,7 +15,6 @@ public class IBLUser {
 	
 	private String passwd;
 	
-	@Id
 	@Column(unique = true,nullable  = false)
 	private String email;
 	

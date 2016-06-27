@@ -18,6 +18,17 @@ public class Story {
 	private String storyText;
 	
 	private int historyId;
+	
+	/**
+	 * 创建的时间
+	 */
+	private long createTime;
+	
+	/**
+	 * 描述的日期
+	 */
+	private long date;
+	
 
 	public int getStoryId() {
 		return storyId;
@@ -49,6 +60,22 @@ public class Story {
 
 	public void setHistoryId(int historyId) {
 		this.historyId = historyId;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public long getDate() {
+		return date;
+	}
+
+	public void setDate(long date) {
+		this.date = date;
 	}
 
 

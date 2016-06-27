@@ -1,15 +1,18 @@
 package com.ibellar.calendar.entity;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Attention {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int attentionId;
 	
 	private int historyId;
-
+	
 	private int userId;
 	
 	private int priority;
