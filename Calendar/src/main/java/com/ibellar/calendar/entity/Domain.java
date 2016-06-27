@@ -1,5 +1,6 @@
 package com.ibellar.calendar.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,6 +10,7 @@ public class Domain {
 	@Id
 	private int domainId;
 	
+	@Column(unique = true,nullable  = false)
 	private String domainName;
 
 	
@@ -21,6 +23,7 @@ public class Domain {
 		this.domainId = domainId;
 	}
 
+	
 	public String getDomainName() {
 		return domainName;
 	}

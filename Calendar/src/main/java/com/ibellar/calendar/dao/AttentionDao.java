@@ -20,35 +20,38 @@ public class AttentionDao {
 		sessionFactory.getCurrentSession().save(at);
 	}
 	
-	public Attention getAttentionWithUid(Integer uid) {
+	public List<Attention> getAttentionWithUid(Integer uid,Integer start,Integer length) {
 		String hql = "from Attention as attention where attention.userId=?";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, uid);
+		query.setFirstResult(start);
+		query.setMaxResults(length);
 		
 		List<Attention> list = query.list();
 		
 		if (list == null || list.size() == 0) {
 			return null;
 		}
-		return list.get(0);
+		return list;
 		
 	}
 	
 	
-	public Attention getAttentionWithHistoryId(Integer hid)  {
+	public List<Attention> getAttentionWithHistoryId(Integer hid,Integer start,Integer length)  {
 
 		String hql = "from Attention as attention where attention.historyId=?";
 		
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, hid);
-		
+		query.setFirstResult(start);
+		query.setMaxResults(length);
 		List<Attention> list = query.list();
 		
 		if (list == null || list.size() == 0) {
 			return null;
 		}
-		return list.get(0);
+		return list;
 		
 	}
 }

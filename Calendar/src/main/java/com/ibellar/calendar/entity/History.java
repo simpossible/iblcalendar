@@ -1,5 +1,6 @@
 package com.ibellar.calendar.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import com.ibellar.calendar.entity.IBLUser;
@@ -10,6 +11,7 @@ public class History {
 	@Id
 	private int historyId;
 	
+	@Column(unique = true,nullable  = false)
 	private String historyName;
 	
 	private String summary;

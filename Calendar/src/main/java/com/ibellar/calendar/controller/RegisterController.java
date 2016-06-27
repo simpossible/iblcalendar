@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ibellar.calendar.IBLException;
 import com.ibellar.calendar.entity.IBLUser;
-import com.ibellar.calendar.service.LoginServerce;
+import com.ibellar.calendar.service.IBLUserService;
 
 @Controller
 public class RegisterController {
 
 	@Autowired
-	private LoginServerce service;
+	private IBLUserService service;
 	
 	@RequestMapping(value = "/registerpage", method = RequestMethod.GET)
 	public String registerPage() {
@@ -31,13 +31,10 @@ public class RegisterController {
 	@RequestMapping(value = "/register_email_param",method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String,Object> registeWithParam(@ModelAttribute("user")IBLUser user) throws IBLException {
-		
-		
 
 		Map<String,Object> map = new HashMap<String, Object>();
 		
 		try {
-
 			service.registerUserWithEmail(user);
 			map.put("result", "succ");
 		} catch (IBLException e) {

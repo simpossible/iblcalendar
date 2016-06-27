@@ -5,9 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
-import org.codehaus.jackson.map.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,13 +17,13 @@ import com.google.gson.Gson;
 import com.ibellar.calendar.IBLErrorCode;
 import com.ibellar.calendar.IBLException;
 import com.ibellar.calendar.entity.IBLUser;
-import com.ibellar.calendar.service.LoginServerce;
+import com.ibellar.calendar.service.IBLUserService;
 
 @Controller
 public class LoginController {
 	
 	@Autowired
-	private LoginServerce service;
+	private IBLUserService service;
 
 	@RequestMapping(value = "/loginpage", method = RequestMethod.GET)
 	public String login(Locale locale, Model model) {

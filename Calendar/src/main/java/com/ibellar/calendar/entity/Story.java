@@ -1,6 +1,8 @@
 package com.ibellar.calendar.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import com.ibellar.calendar.entity.History;
 
@@ -8,6 +10,7 @@ import com.ibellar.calendar.entity.History;
 public class Story {
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int storyId;
 	
 	private String storyName;
