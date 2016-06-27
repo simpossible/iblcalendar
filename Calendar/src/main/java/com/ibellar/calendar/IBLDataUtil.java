@@ -30,7 +30,7 @@ public class IBLDataUtil {
 	  * @param format
 	  * @return
 	  */
-	 public static String convertTime2String(long time, String format) {
+	 public static String convertLongToTimeString(long time, String format) {
 		 SimpleDateFormat formate = new SimpleDateFormat(TIME_FORMAT);
 		 Date dt = new Date(time);
 		
@@ -50,7 +50,7 @@ public class IBLDataUtil {
 	  * @param format
 	  * @return
 	  */
-	 public static String convertDate2String(long time, String format) {
+	 public static String convertLongToDateString(long time, String format) {
 		 SimpleDateFormat formate = new SimpleDateFormat(DATE_FORMAT);
 		 Date dt = new Date(time);
 		
