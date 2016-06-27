@@ -49,8 +49,34 @@ public class StoryDao {
 		return list.size();
 	}
 	
-	public List<Story> queryStoryOfUser(Integer uid) {
-		String hql = "from Story as story where story.c";
+	public List<Story> queryStoryOfUser(Integer uid,Integer start,Integer length) {
+		String hql = "from Story as story where story.creatorId=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setFirstResult(start);
+		query.setMaxResults(length);
+		query.setParameter(0, uid);
+		
+		return query.list();
+	}
+	
+	public Integer queryNumberOfStoryOfUser(Integer uid) {
+		String hql = "from Story as story where story.creatorId=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, uid);
+		
+		return query.list().size();
+	}
+	
+	public Story queryStoryWithHistorydAndName(Integer hid,String name) {
+		String hql  = "from Story as story where story.historyId=? and story.storyName=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, hid);
+		query.setParameter(1, name);
+		List<Story> list = query.list();
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		return list.get(0);
 	}
 
 }

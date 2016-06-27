@@ -15,43 +15,57 @@ public class AttentionDao {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-	
+
 	public void saveAttention(Attention at) {
 		sessionFactory.getCurrentSession().save(at);
 	}
-	
-	public List<Attention> getAttentionWithUid(Integer uid,Integer start,Integer length) {
+
+	public List<Attention> getAttentionWithUid(Integer uid, Integer start, Integer length) {
 		String hql = "from Attention as attention where attention.userId=?";
-		
+
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, uid);
 		query.setFirstResult(start);
 		query.setMaxResults(length);
-		
+
 		List<Attention> list = query.list();
-		
+
 		if (list == null || list.size() == 0) {
 			return null;
 		}
 		return list;
-		
+
 	}
-	
-	
-	public List<Attention> getAttentionWithHistoryId(Integer hid,Integer start,Integer length)  {
+
+	public List<Attention> getAttentionWithHistoryId(Integer hid, Integer start, Integer length) {
 
 		String hql = "from Attention as attention where attention.historyId=?";
-		
+
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, hid);
 		query.setFirstResult(start);
 		query.setMaxResults(length);
 		List<Attention> list = query.list();
-		
+
 		if (list == null || list.size() == 0) {
 			return null;
 		}
 		return list;
+
+	}
+
+	public Attention queryAttentionWithHistoryAndUser(Integer hid, Integer uid) {
+		String hql = "from Attention as attention where attention.historyId=? and attention.userId=?";
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter(0, hid);
+		query.setParameter(1, uid);
 		
+		List<Attention> list = query.list();
+		if (list.isEmpty()) {
+			return null;
+		}else {
+			return list.get(0);
+		}
 	}
 }

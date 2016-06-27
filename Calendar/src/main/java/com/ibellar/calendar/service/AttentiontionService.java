@@ -22,6 +22,18 @@ public class AttentiontionService {
 		attentionDao.saveAttention(attention);
 	}
 	
+	public Attention getAttentionWithHistoryAndUser(Integer hid, Integer uid) {
+		return attentionDao.queryAttentionWithHistoryAndUser(hid, uid);
+	}
+	
+	public boolean isUserAttentionTheHistory(Integer uid,Integer hid){
+		Attention atten = attentionDao.queryAttentionWithHistoryAndUser(hid, uid);
+		if (atten == null) {
+			return false;
+		}
+		return true;
+	}
+	
 	public List<Attention> getAttentionWithUid(Integer uid,Integer start,Integer length) {
 		return attentionDao.getAttentionWithUid(uid, start, length);
 	}
