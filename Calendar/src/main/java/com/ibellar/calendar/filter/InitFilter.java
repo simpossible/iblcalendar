@@ -15,6 +15,7 @@ public class InitFilter implements Filter{
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
 		System.out.println("1212121");
+		filterConfig.getServletContext()
 	}
 
 	@Override

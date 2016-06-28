@@ -10,8 +10,8 @@ import javax.persistence.Id;
 public class Domain {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int domainId;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Integer domainId;
 	
 	@Column(unique = true,nullable  = false)
 	private String domainName;

@@ -11,4 +11,6 @@ public final static String PWError = "密码错误";
 public final static String ACCOUNT_FORMAT_ERR = "账号格式非法";
 
 public final static String ACCOUNT_ALREADY_Exist = "该账号已经注册过了";
+
+public final static String DOMAIN_EXIST = "已存在领域名";
 }

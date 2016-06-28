@@ -1,5 +1,7 @@
 package com.ibellar.calendar.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -24,4 +26,12 @@ public class DomainService {
 		domaindao.saveDomain(domain);
 	}
 	
+	
+	public Integer getAllDomainCount() {
+		return domaindao.QueryAllDomainCount();
+	}
+	
+	public List<Domain> getDomains(Integer start,Integer length) {
+		return domaindao.queryDomain(start, length);
+	}
 }

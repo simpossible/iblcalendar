@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <title>11</title>
 </head>
-<form action="http://localhost:8080/calendar/register_email_param" method="POST">
-    <input type="text" width="300px" height="100px" value="邮箱" name="email">
+<form action="http://localhost:8080/calendar/domain/createdomain" method="POST">
+    <input type="text" width="300px" height="100px" value="邮箱" name="domain_name">
     <br>
     <input type="text" width="300px" height="100px" value="密码" name="passwd">
 

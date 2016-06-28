@@ -2,8 +2,7 @@ package com.ibellar.calendar.dao;
 
 import java.util.List;
 
-import javax.persistence.Query;
-
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -45,6 +44,21 @@ public class DomainDao {
 			return null;
 		}
 		return list.get(0);
+	}
+	
+	public Integer QueryAllDomainCount() {
+		String hql = "select count(*) from Domain as domain" ;
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return ((Number)query.uniqueResult()).intValue();
+	}
+	
+	public List<Domain> queryDomain(Integer start,Integer length) {
+		String hql = "from Domain as domain";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setFirstResult(start);
+		query.setMaxResults(length);
+		
+		return query.list();
 	}
 	
 	public boolean isDoaminExist(String name) {
