@@ -42,11 +42,10 @@ public class StoryDao {
 	}
 	
 	public Integer qureyNumberOfStoryInHistoryId(Integer hid) {
-		String hql  = "from Story as story where story.historyId=?";
+		String hql  = "select count(*) from Story as story where story.historyId=?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, hid);
-		List<Story> list = query.list();
-		return list.size();
+		return  ((Number)query.uniqueResult()).intValue();
 	}
 	
 	public List<Story> queryStoryOfUser(Integer uid,Integer start,Integer length) {
@@ -60,11 +59,11 @@ public class StoryDao {
 	}
 	
 	public Integer queryNumberOfStoryOfUser(Integer uid) {
-		String hql = "from Story as story where story.creatorId=?";
+		String hql = "select count(*) from Story as story where story.creatorId=?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, uid);
 		
-		return query.list().size();
+		return  ((Number)query.uniqueResult()).intValue();
 	}
 	
 	public Story queryStoryWithHistorydAndName(Integer hid,String name) {
@@ -78,5 +77,22 @@ public class StoryDao {
 		}
 		return list.get(0);
 	}
-
+	
+	/***
+	 * 获取热度story
+	 */
+	
+	public List<Story> queryStoryOrderByHotdegree(Integer start,Integer length) {
+		String hql = "from Story as story order by story.hotDegree desc";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setFirstResult(start);
+		query.setMaxResults(length);
+		return query.list();
+	}
+	
+	public Integer queryTotalNumberOfStory() {
+		String hql = "select count(*) from Story as story";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return  ((Number)query.uniqueResult()).intValue();
+	}
 }

@@ -21,6 +21,9 @@ public class Story {
 	
 	private Integer creatorId;
 	
+	private Integer hotDegree;//热度
+	
+	private Integer agree;//赞的个数
 
 	/**
 	 * 创建的时间
@@ -87,6 +90,22 @@ public class Story {
 
 	public void setCreatorId(Integer creatorId) {
 		this.creatorId = creatorId;
+	}
+
+	public Integer getHotDegree() {
+		return hotDegree;
+	}
+
+	public void setHotDegree(Integer hotDegree) {
+		this.hotDegree = hotDegree;
+	}
+
+	public Integer getAgree() {
+		return agree;
+	}
+
+	public void setAgree(Integer agree) {
+		this.agree = agree;
 	}
 
 

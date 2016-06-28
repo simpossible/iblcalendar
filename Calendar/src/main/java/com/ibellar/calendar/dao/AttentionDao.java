@@ -53,6 +53,13 @@ public class AttentionDao {
 		return list;
 
 	}
+	
+	public Integer getAttentionNumberInHistoryId(Integer hid) {
+		String hql = "select count(*) from Attention as attention where attention.historyId=?";
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return  ((Number)query.uniqueResult()).intValue();
+	}
 
 	public Attention queryAttentionWithHistoryAndUser(Integer hid, Integer uid) {
 		String hql = "from Attention as attention where attention.historyId=? and attention.userId=?";
@@ -67,5 +74,12 @@ public class AttentionDao {
 		}else {
 			return list.get(0);
 		}
+	}
+	
+	public Integer QueryAttentionNumberOfUser(Integer uid) {
+		String hql = "select count(*) from Attention as attention where attention.userId=?";
+
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return  ((Number)query.uniqueResult()).intValue();
 	}
 }

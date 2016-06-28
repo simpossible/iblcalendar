@@ -34,7 +34,7 @@ public class DomainDao {
 		return list.get(0);
 	}
 	
-	public Domain getDomainWithName (String name) {
+	public Domain queryDomainWithName (String name) {
 		
 		String hql = "from Domain as domain where domain.domainName = ?";
 		org.hibernate.Query query = sessionFactory.getCurrentSession().createQuery(hql);
@@ -48,7 +48,7 @@ public class DomainDao {
 	}
 	
 	public boolean isDoaminExist(String name) {
-		Domain domain = getDomainWithName(name);
+		Domain domain = queryDomainWithName(name);
 		if (domain == null) {
 			return false;
 		}

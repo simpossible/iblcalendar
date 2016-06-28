@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ibellar.calendar.entity.History;
+import com.ibellar.calendar.entity.Story;
 
 @Repository
 public class HistoryDao {
@@ -43,10 +44,10 @@ public class HistoryDao {
 	}
 
 	public Integer queryNumberOfHistoryOfUser(Integer uid) {
-		String hql = "from History as history where history.creatorId=?";
+		String hql = "select count(*) from History as history where history.creatorId=?";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, uid);
-		return query.list().size();
+		return  ((Number)query.uniqueResult()).intValue();
 	}
 
 	public List<History> queryHistoryOfUser(Integer uid, Integer start, Integer length) {
@@ -69,5 +70,19 @@ public class HistoryDao {
 			return null;
 		}
 		return list.get(0);
+	}
+	
+	public List<Story> queryHistoryOrderByHotdegree(Integer start,Integer length) {
+		String hql = "from History as history order by history.hotDegree desc";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setFirstResult(start);
+		query.setMaxResults(length);
+		return query.list();
+	}
+	
+	public Integer queryTotalNumberOfHistory() {
+		String hql = "select count(*) from History as history";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		return  ((Number)query.uniqueResult()).intValue();
 	}
 }

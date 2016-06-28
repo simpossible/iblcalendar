@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.ibellar.calendar.IBLErrorCode;
 import com.ibellar.calendar.IBLException;
+import com.ibellar.calendar.IBLTokenUtil;
 import com.ibellar.calendar.entity.IBLUser;
 import com.ibellar.calendar.service.IBLUserService;
 
@@ -35,7 +37,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login_email_param", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String loginwithparam(HttpServletRequest request) throws Exception {
+	public String loginwithparam(HttpServletRequest request,HttpSession session) throws Exception {
 		
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("passwd");
@@ -47,6 +49,10 @@ public class LoginController {
 			map.put("nickName", user.getNickName());
 
 	        map.put("code", IBLErrorCode.ALL_OK); 
+	        
+	        String token = IBLTokenUtil.EncryptString(user.getEmail());
+	        map.put("access_token", token);
+	        session.setAttribute("access_token", token);
 		} catch (IBLException e) {
 			// TODO: handle exception
 

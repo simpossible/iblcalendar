@@ -23,6 +23,9 @@ public class History {
 	
 	private long createTime;
 	
+	private Integer hotDegree;//热度
+	
+	private Integer agree;//赞的个数
 
 	public int getHistoryId() {
 		return historyId;
@@ -62,6 +65,22 @@ public class History {
 
 	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
+	}
+
+	public Integer getHotDegree() {
+		return hotDegree;
+	}
+
+	public void setHotDegree(Integer hotDegree) {
+		this.hotDegree = hotDegree;
+	}
+
+	public Integer getAgree() {
+		return agree;
+	}
+
+	public void setAgree(Integer agree) {
+		this.agree = agree;
 	}
 
 
