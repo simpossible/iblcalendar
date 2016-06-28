@@ -31,6 +31,10 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
+<!-- 	<filter>
+		<filter-class>com.ibellar.calendar.filter.InitFilter</filter-class>
+		<filter-name></filter-name>
+	</filter> -->
 	
 
 	<!-- <filter>

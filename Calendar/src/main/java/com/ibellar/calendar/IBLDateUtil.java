@@ -5,7 +5,7 @@ import java.util.Date;
 
 import org.springframework.util.StringUtils;
 
-public class IBLDataUtil {
+public class IBLDateUtil {
 	 public static String DATE_FORMAT = "yyyy-MM-dd";
 	 
 	 // 长日期格式

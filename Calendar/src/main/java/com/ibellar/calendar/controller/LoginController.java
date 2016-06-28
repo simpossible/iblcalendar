@@ -52,7 +52,7 @@ public class LoginController {
 	        
 	        String token = IBLTokenUtil.EncryptString(user.getEmail());
 	        map.put("access_token", token);
-	        session.setAttribute("access_token", token);
+	        session.setAttribute("tokenid", user.getEmail());
 		} catch (IBLException e) {
 			// TODO: handle exception
 
