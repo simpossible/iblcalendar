@@ -39,6 +39,12 @@ public class IBLTokenUtil {
 
 	}
 
+	/***
+	 * 对 token 解码 并得到存储在里面的
+	 * @param token
+	 * @param key
+	 * @return
+	 */
 	public static Object getvalueFromTokenWithKey(String token,String key) {
 		String json = decryptToken(token);
 		Gson gson = new Gson();
