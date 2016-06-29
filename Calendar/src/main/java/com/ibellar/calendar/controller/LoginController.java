@@ -82,9 +82,10 @@ public class LoginController {
 		
 		try {
 			service.registerUserWithEmail(user);
-			map.put("result", "succ");
+			map.put("code",IBLErrorCode.ALL_OK);
 		} catch (IBLException e) {
 			e.printStackTrace();
+			map.put("error",e.getErrorMessage());
 		}
 		
 		return map;
