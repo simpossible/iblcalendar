@@ -16,6 +16,8 @@ public class Attention {
 	private int userId;
 	
 	private int priority;
+	
+	private long attentionTime;
 
 	public int getAttentionId() {
 		return attentionId;
@@ -49,6 +51,14 @@ public class Attention {
 
 	public void setPriority(int priority) {
 		this.priority = priority;
+	}
+
+	public long getAttentionTime() {
+		return attentionTime;
+	}
+
+	public void setAttentionTime(long attentionTime) {
+		this.attentionTime = attentionTime;
 	}
 	
 	
