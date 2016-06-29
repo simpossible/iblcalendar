@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.ibellar.calendar.IBLDateUtil;
+import com.ibellar.calendar.IBLDefine;
 import com.ibellar.calendar.IBLErrorCode;
 import com.ibellar.calendar.IBLException;
 import com.ibellar.calendar.IBLTokenUtil;
@@ -43,19 +45,23 @@ public class LoginController {
 		String passwd = request.getParameter("passwd");
 		
 		Map<String,Object> map = new HashMap<String,Object>(); 
+		Map<String,Object> tokenMap = new HashMap<String,Object>(); 
 		try {
 			IBLUser user = service.loginWithEmail(email, passwd);
-			map.put("email", user.getEmail());
-			map.put("nickName", user.getNickName());
-
+			map.put("user", user);
 	        map.put("code", IBLErrorCode.ALL_OK); 
+	    
+	        tokenMap.put(IBLDefine.Account_key, user.getEmail());
+	        tokenMap.put(IBLDefine.Uid_Key, user.getUid());
+	        tokenMap.put(IBLDefine.Date_key, IBLDateUtil.currentTimeMillis());
 	        
-	        String token = IBLTokenUtil.EncryptString(user.getEmail());
-	        map.put("access_token", token);
-	        session.setAttribute("tokenid", user.getEmail());
+	        String token = IBLTokenUtil.encryptMap(tokenMap);
+	        map.put(IBLDefine.Token_key, token);
+	        session.setAttribute(IBLDefine.Account_key, user.getEmail());
+	        
+	              
 		} catch (IBLException e) {
 			// TODO: handle exception
-
 	        map.put("code", e.getErrorcode());
 	        map.put("error", e.getErrorMessage());
 		}

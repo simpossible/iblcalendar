@@ -7,6 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ibellar.calendar.IBLErrorCode;
+import com.ibellar.calendar.IBLException;
 import com.ibellar.calendar.entity.IBLUser;
 
 @Repository
@@ -39,6 +41,26 @@ public class IBLUserDao {
 			return null;
 		}
 		return list.get(0);
+
+	}
+	
+	public IBLUser quearyUserWithToken(String token) {
+
+		String hql = "from IBLUser as user where user.accessToken=?";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setString(0, token);
+
+		List<IBLUser> list = query.list();
+
+		if (list == null || list.size() == 0) {
+			return null;
+		}
+		return list.get(0);
+
+	}
+	
+	public void upDateUser(IBLUser u) throws IBLException  {
+				sessionFactory.getCurrentSession().update(u);
 
 	}
 }

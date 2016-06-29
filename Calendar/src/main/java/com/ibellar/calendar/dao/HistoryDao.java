@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ibellar.calendar.entity.History;
-import com.ibellar.calendar.entity.Story;
 
 @Repository
 public class HistoryDao {
@@ -72,7 +71,7 @@ public class HistoryDao {
 		return list.get(0);
 	}
 	
-	public List<Story> queryHistoryOrderByHotdegree(Integer start,Integer length) {
+	public List<History> queryHistoryOrderByHotdegree(Integer start,Integer length) {
 		String hql = "from History as history order by history.hotDegree desc";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setFirstResult(start);

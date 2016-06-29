@@ -75,6 +75,39 @@ public class IBLUserService {
 		}
 	}
 	
+	//通过token 获得用户
+	public  IBLUser getUserWithToken(String token) throws IBLException {
+		IBLUser u = dao.quearyUserWithToken(token);
+		if (u != null) {
+			return u;
+		} else {
+			throw new IBLException(IBLErrorCode.ACCOUNT_DOES_NOT_EXIST);
+		}
+	}
+	
+	//通过帐号获得用户
+	public  IBLUser getUserWithEmail(String email) throws IBLException {
+		if (!this.isEmailRight(email)) {
+			throw new IBLException(IBLErrorCode.ACCOUNT_FORMAT_ERROR);
+		}
+		IBLUser u = dao.quearyUserWithEmail(email);
+
+		if (u != null) {
+				return u;
+			} else {
+				throw new IBLException(IBLErrorCode.ACCOUNT_DOES_NOT_EXIST);
+			}
+		
+	}
+	
+	public void updateUser(IBLUser u) throws IBLException {
+		try {
+			dao.upDateUser(u);
+		} catch (Exception e) {
+			throw new IBLException(IBLErrorCode.DATABASE_ERROR);
+		}
+	}
+	
 	
 	
 	/***
