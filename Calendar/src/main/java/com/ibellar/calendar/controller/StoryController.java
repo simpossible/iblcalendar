@@ -93,10 +93,10 @@ public class StoryController {
 		} catch (IBLException e) {
 			map.put("code", e.getErrorcode());
 			map.put("error", e.getErrorMessage());
+			return new Gson().toJson(map);
 			// TODO: handle exception
 		}
-		Gson gson = new Gson();
-		return gson.toJson(map);
+		return new Gson().toJson(map);
 	}
 	
 	@RequestMapping(value = "/story/createStory", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
@@ -116,6 +116,7 @@ public class StoryController {
 		} catch (IBLException e) {
 			map.put("code", e.getErrorcode());
 			map.put("error", e.getErrorMessage());
+			return new Gson().toJson(map);
 		}
 		Gson gson = new Gson();
 		return gson.toJson(map);

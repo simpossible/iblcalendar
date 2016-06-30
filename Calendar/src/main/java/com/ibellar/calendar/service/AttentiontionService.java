@@ -90,6 +90,7 @@ public class AttentiontionService {
 		try {
 			return attentionDao.queryAttenionsHistory(uid, start, length);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new IBLException(IBLErrorCode.DATABASE_ERROR);
 			// TODO: handle exception
 		}

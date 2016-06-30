@@ -3,6 +3,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Attention {
@@ -12,6 +13,9 @@ public class Attention {
 	private int attentionId;
 	
 	private int historyId;
+	
+//	@OneToOne
+//	private History histoy;
 	
 	private int userId;
 	
@@ -60,7 +64,15 @@ public class Attention {
 	public void setAttentionTime(long attentionTime) {
 		this.attentionTime = attentionTime;
 	}
-	
+
+//	public History getHistoy() {
+//		return histoy;
+//	}
+//
+//	public void setHistoy(History histoy) {
+//		this.histoy = histoy;
+//	}
+//	
 	
 	
 	

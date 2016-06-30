@@ -64,6 +64,7 @@ public class LoginController {
 			// TODO: handle exception
 	        map.put("code", e.getErrorcode());
 	        map.put("error", e.getErrorMessage());
+	        return new Gson().toJson(map);
 		}
 //       
         Gson json = new Gson();
@@ -82,7 +83,7 @@ public class LoginController {
 	
 	@RequestMapping(value = "/register_email_param",method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String,Object> registeWithParam(@ModelAttribute("user")IBLUser user) throws IBLException {
+	public String registeWithParam(@ModelAttribute("user")IBLUser user) throws IBLException {
 
 		Map<String,Object> map = new HashMap<String, Object>();
 		
@@ -92,8 +93,9 @@ public class LoginController {
 		} catch (IBLException e) {
 			e.printStackTrace();
 			map.put("error",e.getErrorMessage());
+			return new Gson().toJson(map);
 		}
 		
-		return map;
+		 return new Gson().toJson(map);
 	}
 }

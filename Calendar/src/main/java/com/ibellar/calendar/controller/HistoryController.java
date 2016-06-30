@@ -46,6 +46,8 @@ public class HistoryController {
 		} catch (IBLException e) {
 			map.put("code", e.getErrorcode());
 			map.put("error", e.getErrorMessage());
+
+			return new Gson().toJson(map);
 		}
 		Gson json = new Gson();
 		String result = json.toJson(map);
@@ -62,7 +64,7 @@ public class HistoryController {
 		
 		try {
 			String token = request.getHeader("access_token");
-			Integer uid = Integer.parseInt((String) IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key));
+			Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 			
 			if (uid != 0) {
 				history.setCreatorId(uid);
@@ -72,12 +74,14 @@ public class HistoryController {
 				map.put("history", history);
 			}else {
 				throw new IBLException(IBLErrorCode.AUTHORY_EOORY);
+				
 			}
 				
 		
 		} catch (IBLException e) {
 			map.put("code", e.getErrorcode());
 			map.put("error", e.getErrorMessage());
+			return new Gson().toJson(map);
 			// TODO: handle exception
 		}
 		Gson json = new Gson();
@@ -89,7 +93,8 @@ public class HistoryController {
 	@RequestMapping(value = "/history/getHistorysWithUid", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getHistory(HttpServletRequest request) {
-		Integer uid = Integer.parseInt(request.getParameter("uid"));
+		String token = request.getHeader(IBLDefine.Token_key);
+		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Integer start = Integer.parseInt(request.getParameter("start"));
 		;
 		Integer length = Integer.parseInt(request.getParameter("length"));
@@ -104,6 +109,7 @@ public class HistoryController {
 
 			map.put("code", e.getErrorcode());
 			map.put("error", e.getErrorMessage());
+			return new Gson().toJson(map);
 			// TODO: handle exception
 		}
 
@@ -117,7 +123,8 @@ public class HistoryController {
 	@RequestMapping(value = "/history/countHistoryInUser", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getHistoryNumberOfUid(HttpServletRequest request) {
-		Integer uid = Integer.parseInt(request.getParameter("uid"));
+		String token = request.getHeader(IBLDefine.Token_key);
+		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		try {
@@ -127,6 +134,7 @@ public class HistoryController {
 		} catch (IBLException e) {
 			map.put("code", e.getErrorcode());
 			map.put("error", e.getErrorMessage());
+			return new Gson().toJson(map);
 			// TODO: handle exception
 		}
 

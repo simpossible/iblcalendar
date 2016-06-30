@@ -40,6 +40,8 @@ public class DomainController {
 			}else {
 				map.put("code", IBLErrorCode.DOMAIN_ALREADY_EXIST);
 				map.put("error", IBLErrorCode.codeToString(IBLErrorCode.DOMAIN_ALREADY_EXIST));
+
+				
 			}
 		}
 

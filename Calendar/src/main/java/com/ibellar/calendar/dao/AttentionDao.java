@@ -94,12 +94,14 @@ public class AttentionDao {
 
 	public List<History> queryAttenionsHistory(Integer uid,Integer start,Integer length) {
 
-		String hql = "from History as history where history.historyId in ( select at from Attention order by at.attentionTime desc where at.uid =?)";
+		String hql = "select h from History as h , Attention as a  where a.userId =? and  a.historyId = h.historyId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter(0, uid);
 		query.setFirstResult(start);
 		query.setMaxResults(length);
 		
+		List<Object> list = query.list();
+		System.out.println(list);
 		return query.list();
 		}
 	
