@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.ibellar.calendar.IBLDateUtil;
 import com.ibellar.calendar.IBLDefine;
 import com.ibellar.calendar.IBLErrorCode;
 import com.ibellar.calendar.IBLException;
@@ -32,13 +33,15 @@ public class AttentionController {
 	public String AttentionAHistory(@ModelAttribute("attention") Attention attention, HttpServletRequest request) {
 
 		String token = request.getHeader(IBLDefine.Token_key);
-		Integer uid = Integer.parseInt((String) IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key));
+		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		try {
 			if (uid == 0) {
 				throw new IBLException(IBLErrorCode.AUTHORY_EOORY);
 			} else {
+				attention.setUserId(uid);
+				attention.setAttentionTime(IBLDateUtil.currentTimeMillis());
 				attentionService.addAttention(attention);
 				map.put("code", IBLErrorCode.ALL_OK);
 				map.put("attention", attention);

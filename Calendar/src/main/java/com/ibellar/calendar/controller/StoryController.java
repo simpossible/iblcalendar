@@ -32,7 +32,7 @@ public class StoryController {
 	@ResponseBody
 	public String getMyAllCreateStory(HttpServletRequest request) {// 获取我创建所有的story
 		String token = request.getHeader(IBLDefine.Token_key);
-		Integer uid = Integer.parseInt((String) IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key));
+		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Integer start = Integer.parseInt(request.getParameter("start"));
 		Integer length = Integer.parseInt(request.getParameter("length"));
 
@@ -59,7 +59,7 @@ public class StoryController {
 	@ResponseBody
 	public String getMyAllCreateStoryNumber(HttpServletRequest request) {
 		String token = request.getHeader(IBLDefine.Token_key);
-		Integer uid = Integer.parseInt((String) IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key));
+		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -103,7 +103,7 @@ public class StoryController {
 	@ResponseBody
 	public String savaStory(@ModelAttribute("story")Story story, HttpServletRequest request) {
 		String token = request.getHeader(IBLDefine.Token_key);
-		Integer uid = Integer.parseInt((String) IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key));
+		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			if (story.getStoryName() == null|| story.getHistoryId() == 0) {
