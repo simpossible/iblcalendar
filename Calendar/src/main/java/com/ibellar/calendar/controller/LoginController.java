@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,9 @@ public class LoginController {
 	
 	@RequestMapping(value = "/login_email_param", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String loginwithparam(HttpServletRequest request,HttpSession session) throws Exception {
-		
+	public String loginwithparam(HttpServletRequest request,HttpSession session,HttpServletResponse response) throws Exception {
+
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("passwd");
 		
@@ -66,9 +68,10 @@ public class LoginController {
 	        map.put("error", e.getErrorMessage());
 	        return new Gson().toJson(map);
 		}
-//       
+		
         Gson json = new Gson();
         String jj = json.toJson(map);
+        System.out.println(jj);
 		return jj;
 	}
 	
