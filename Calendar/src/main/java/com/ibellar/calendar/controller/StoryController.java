@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ public class StoryController {
 	@RequestMapping(value = "/Story/myStorys", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getMyAllCreateStory(HttpServletRequest request) {// 获取我创建所有的story
-		String token = request.getHeader(IBLDefine.Token_key);
+		String token = request.getParameter(IBLDefine.Token_key);
 		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Integer start = Integer.parseInt(request.getParameter("start"));
 		Integer length = Integer.parseInt(request.getParameter("length"));
@@ -58,7 +59,7 @@ public class StoryController {
 	@RequestMapping(value = "/story/myCreateNumber", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getMyAllCreateStoryNumber(HttpServletRequest request) {
-		String token = request.getHeader(IBLDefine.Token_key);
+		String token = request.getParameter(IBLDefine.Token_key);
 		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -101,12 +102,14 @@ public class StoryController {
 	
 	@RequestMapping(value = "/story/createStory", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public String savaStory(@ModelAttribute("story")Story story, HttpServletRequest request) {
-		String token = request.getHeader(IBLDefine.Token_key);
+	public String savaStory(@ModelAttribute("story")Story story, HttpServletRequest request,HttpServletResponse response) {
+		
+		response.setHeader("Access-Control-Allow-Origin", "*");
+		String token = request.getParameter(IBLDefine.Token_key);
 		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			if (story.getStoryName() == null|| story.getHistoryId() == 0) {
+			if (story.getStoryName() == null|| story.getHistoryId() == 0 || story.getStoryDate() == 100000000) {
 				throw new IBLException(IBLErrorCode.ILLEGAL_PARAM);
 			}
 			story.setCreateTime(IBLDateUtil.currentTimeMillis());
@@ -122,4 +125,9 @@ public class StoryController {
 		return gson.toJson(map);
 	}
 	// 获取热门的hitsory 在用户没有登录的时候
+
+
+	
 }
+
+

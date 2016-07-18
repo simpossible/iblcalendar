@@ -55,6 +55,7 @@ public class AccessPrehandler implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		System.out.println("收到请求");
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		String uri = request.getRequestURI();
 		if (this.isUriInwhiteList(uri)) {
 			System.out.println("放行请求");
@@ -63,29 +64,35 @@ public class AccessPrehandler implements HandlerInterceptor {
 			HttpSession session = request.getSession();
 			String sessionAccount = (String) session.getAttribute(IBLDefine.Account_key);
 
-			String accessToken = request.getHeader(IBLDefine.Token_key);
+			String accessToken = request.getParameter(IBLDefine.Token_key);
+			
+		
 
 			String account = (String) IBLTokenUtil.getvalueFromTokenWithKey(accessToken, IBLDefine.Account_key);
 			
-			if (sessionAccount == null || account == null) {
+			if (/*sessionAccount == null ||*/ account == null) {
 				System.out.println("未授权的请求");
 				return false;
-			}
-			if (account.equals(sessionAccount)) {
-				System.out.println("放行请求");
+			}else {
 				return true;
-			} else {
-				System.out.println("授权错误的请求");
-				return false;
 			}
+//			if (account.equals(sessionAccount)) {
+//				System.out.println("放行请求");
+//				return true;
+//			} else {
+//				System.out.println("授权错误的请求");
+//				return false;
+//			}
 
 		}
+		
 	}
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		System.out.println("Post-handle");
+		
 	}
 
 	@Override

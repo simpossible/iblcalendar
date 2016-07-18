@@ -63,7 +63,7 @@ public class HistoryController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			String token = request.getHeader("access_token");
+			String token = IBLTokenUtil.tokenForRequest(request);
 			Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 			
 			if (uid != 0) {
@@ -93,7 +93,7 @@ public class HistoryController {
 	@RequestMapping(value = "/history/getHistorysWithUid", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getHistory(HttpServletRequest request) {
-		String token = request.getHeader(IBLDefine.Token_key);
+		String token = IBLTokenUtil.tokenForRequest(request);
 		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Integer start = Integer.parseInt(request.getParameter("start"));
 		;
@@ -123,7 +123,7 @@ public class HistoryController {
 	@RequestMapping(value = "/history/countHistoryInUser", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getHistoryNumberOfUid(HttpServletRequest request) {
-		String token = request.getHeader(IBLDefine.Token_key);
+		String token = IBLTokenUtil.tokenForRequest(request);;
 		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Map<String, Object> map = new HashMap<String, Object>();
 

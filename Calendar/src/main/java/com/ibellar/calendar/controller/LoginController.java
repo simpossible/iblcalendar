@@ -37,12 +37,12 @@ public class LoginController {
 		return "IBLLogin";
 	}
 	
-	
+	//根据邮箱和密码进行登录
 	@RequestMapping(value = "/login_email_param", method = RequestMethod.POST,produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String loginwithparam(HttpServletRequest request,HttpSession session,HttpServletResponse response) throws Exception {
-
 		response.setHeader("Access-Control-Allow-Origin", "*");
+		
 		String email = request.getParameter("email");
 		String passwd = request.getParameter("passwd");
 		
@@ -50,9 +50,11 @@ public class LoginController {
 		Map<String,Object> tokenMap = new HashMap<String,Object>(); 
 		try {
 			IBLUser user = service.loginWithEmail(email, passwd);
-			map.put("user", user);
+//			map.put("user", user);
 	        map.put("code", IBLErrorCode.ALL_OK); 
-	    
+	        map.put("nickname", user.getNickName());
+	        map.put("email", user.getEmail());
+	        
 	        tokenMap.put(IBLDefine.Account_key, user.getEmail());
 	        tokenMap.put(IBLDefine.Uid_Key, user.getUid());
 	        tokenMap.put(IBLDefine.Date_key, IBLDateUtil.currentTimeMillis());
@@ -83,11 +85,12 @@ public class LoginController {
 		return "Register";
 	}	
 	
-	
+	//根据邮箱和密码等信息注册
 	@RequestMapping(value = "/register_email_param",method = RequestMethod.POST)
 	@ResponseBody
-	public String registeWithParam(@ModelAttribute("user")IBLUser user) throws IBLException {
+	public String registeWithParam(@ModelAttribute("user")IBLUser user,HttpServletResponse response) throws IBLException {
 
+		response.setHeader("Access-Control-Allow-Origin", "*");
 		Map<String,Object> map = new HashMap<String, Object>();
 		
 		try {

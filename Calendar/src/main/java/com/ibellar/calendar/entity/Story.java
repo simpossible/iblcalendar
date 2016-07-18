@@ -1,5 +1,6 @@
 package com.ibellar.calendar.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,9 @@ public class Story {
 	private int historyId;
 	
 	private Integer creatorId;
+	
+	@Column(unique = true,nullable  = false)
+	private Integer storyDate;//故事发生的时间 120110203
 	
 	private Integer hotDegree;//热度
 	
@@ -108,7 +112,18 @@ public class Story {
 		this.agree = agree;
 	}
 
+	public Integer getStoryDate() {
+		return storyDate;
+	}
 
-	
+	public void setStoryDate(Integer storyDate) {
+		if (storyDate > 99999999 || storyDate <-99999999) {
+			this.storyDate = 100000000;
+		}
+		this.storyDate = storyDate;
+		
+	}
+
+
 	
 }
