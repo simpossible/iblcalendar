@@ -26,6 +26,8 @@ public class History {
 	private Integer hotDegree;//热度
 	
 	private Integer agree;//赞的个数
+	
+	private String historyLogoPath;//图标的静态地址
 
 	public int getHistoryId() {
 		return historyId;
@@ -81,6 +83,14 @@ public class History {
 
 	public void setAgree(Integer agree) {
 		this.agree = agree;
+	}
+
+	public String getHistoryLogoPath() {
+		return historyLogoPath;
+	}
+
+	public void setHistoryLogoPath(String historyLogoPath) {
+		this.historyLogoPath = historyLogoPath;
 	}
 
 
