@@ -106,6 +106,28 @@ public class DomainController {
 		}
 
 	}
+	
+	@RequestMapping(value = "/domain/searchDomain", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String searchDomainWithName(HttpServletRequest request) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		String domainName = request.getParameter("domain_name");
+
+		try {
+			Domain domain = domainService.getDomainWithName(domainName);
+			map.put("code", IBLErrorCode.ALL_OK);
+			map.put("result", domain);
+			Gson json = new Gson();
+			String reslt = json.toJson(map);
+			System.out.println(reslt);
+			return reslt;
+		} catch (IBLException e) {
+			map.put("code", e.getErrorcode());
+			map.put("error", e.getErrorMessage());
+			return new Gson().toJson(map);
+		}
+
+	}
 
 	/// 判断域名的合法性
 	private boolean isDomainNameIllegle(String domainName) {

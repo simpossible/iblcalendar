@@ -28,6 +28,8 @@ public class History {
 	private Integer agree;//赞的个数
 	
 	private String historyLogoPath;//图标的静态地址
+	
+	private Integer priority;//权限 0为默认值 公开 1为私人 
 
 	public int getHistoryId() {
 		return historyId;
@@ -91,6 +93,14 @@ public class History {
 
 	public void setHistoryLogoPath(String historyLogoPath) {
 		this.historyLogoPath = historyLogoPath;
+	}
+
+	public Integer getPriority() {
+		return priority;
+	}
+
+	public void setPriority(Integer priority) {
+		this.priority = priority;
 	}
 
 

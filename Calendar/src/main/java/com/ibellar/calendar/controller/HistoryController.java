@@ -90,7 +90,7 @@ public class HistoryController {
 		return results;
 	}
 
-	@RequestMapping(value = "/history/getHistorysWithUid", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/history/getHistorys", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getHistory(HttpServletRequest request) {
 		String token = IBLTokenUtil.tokenForRequest(request);
