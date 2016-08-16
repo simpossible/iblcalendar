@@ -1,14 +1,23 @@
 package com.ibellar.calendar.entity;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import org.codehaus.jackson.annotate.JsonSubTypes.Type;
+
 import com.ibellar.calendar.entity.History;
+
+import javassist.compiler.Javac;
 
 @Entity
 public class Story {
+
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -16,6 +25,9 @@ public class Story {
 	
 	private String storyName;
 	
+//	@Basic(fetch = FetchType.LAZY)   
+//	@Type(type="text")  
+	@Column(columnDefinition="TEXT", length = 65535) 
 	private String storyText;
 	
 	private int historyId;
@@ -27,7 +39,7 @@ public class Story {
 	
 	private Integer hotDegree;//热度
 	
-	private Integer agree;//赞的个数
+//	private Integer agree;//赞的个数
 
 	/**
 	 * 创建的时间
@@ -104,13 +116,13 @@ public class Story {
 		this.hotDegree = hotDegree;
 	}
 
-	public Integer getAgree() {
-		return agree;
-	}
-
-	public void setAgree(Integer agree) {
-		this.agree = agree;
-	}
+//	public Integer getAgree() {
+//		return agree;
+//	}
+//
+//	public void setAgree(Integer agree) {
+//		this.agree = agree;
+//	}
 
 	public Integer getStoryDate() {
 		return storyDate;

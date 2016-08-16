@@ -113,6 +113,8 @@ public class StoryController {
 				throw new IBLException(IBLErrorCode.ILLEGAL_PARAM);
 			}
 			story.setCreateTime(IBLDateUtil.currentTimeMillis());
+//			story.setAgree(9);
+			story.setHotDegree(9);
 			story.setCreatorId(uid);
 			storyService.addStory(story);
 			map.put("code", IBLErrorCode.ALL_OK);
