@@ -81,14 +81,14 @@ public class StoryController {
 		return gson.toJson(map);
 	}
 	
-	@RequestMapping(value = "/story/hotHistory", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@RequestMapping(value = "/story/hotStory", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getHotStory(HttpServletRequest request) {
 		Integer start = Integer.parseInt(request.getParameter("start"));
 		Integer length = Integer.parseInt(request.getParameter("length"));
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-				List<Story> list = storyService.gethotStory(start, length);
+				List<HashMap> list = storyService.gethotStory(start, length);
 				map.put("code", IBLErrorCode.ALL_OK);
 				map.put("result", list);
 		} catch (IBLException e) {

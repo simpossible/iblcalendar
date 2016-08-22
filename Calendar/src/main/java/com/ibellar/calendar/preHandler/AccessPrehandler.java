@@ -34,6 +34,7 @@ public class AccessPrehandler implements HandlerInterceptor {
 		this.whitList.add("/calendar/registerpage");
 		this.whitList.add("/calendar/register_email_param");
 		this.whitList.add("/calendar/");
+		this.whitList.add("/calendar/story/hotStory");
 	}
 
 	/***

@@ -1,7 +1,10 @@
 package com.ibellar.calendar.service;
 
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ibellar.calendar.IBLErrorCode;
 import com.ibellar.calendar.IBLException;
 import com.ibellar.calendar.dao.StoryDao;
+import com.ibellar.calendar.entity.Domain;
+import com.ibellar.calendar.entity.History;
 import com.ibellar.calendar.entity.Story;
 
 @Transactional
@@ -106,11 +111,39 @@ public class StoryService {
 			}
 		
 	}
-	public List<Story> gethotStory(Integer start,Integer length) throws IBLException {
+	public List<HashMap> gethotStory(Integer start,Integer length) throws IBLException {
 		
 		try {
-		return	storydao.queryStoryOrderByHotdegree(start, length);
+			
+			List<Object> origin = storydao.queryStoryOrderByHotdegree(start, length);
+			
+			List<HashMap> result = new ArrayList<HashMap>();
+			
+			for (int i = 0; i < origin.size(); i++) {
+		
+				Object[] a = (Object[]) origin.get(i);
+				Story story =	(Story) a[0];
+				History his = (History) a[1];
+				Domain dom = (Domain) a[2];
+			 
+			 HashMap<String, Object> map = new HashMap<String, Object>();
+			 map.put("storyId", story.getStoryId());
+			 map.put("storyText", story.getStoryText());
+			 map.put("storyName", story.getStoryName());
+			 map.put("storyTime",story.getStoryDate());
+			 map.put("createTime", story.getCreateTime());
+			 map.put("historyId", his.getHistoryId());
+			 map.put("historyName", his.getHistoryName());
+			 map.put("domainId", dom.getDomainId());
+			 map.put("domainName", dom.getDomainName());
+			 
+			 result.add(map);
+			}
+			
+			
+		return	result;
 		} catch (Exception e) {
+			e.printStackTrace();	
 			throw new IBLException(IBLErrorCode.DATABASE_ERROR);
 			// TODO: handle exception
 		}

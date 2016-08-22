@@ -17,6 +17,10 @@ public class History {
 	@Column(unique = true,nullable  = false)
 	private String historyName;
 	
+	private Integer domainId;//所属领域
+	
+
+
 	private String summary;
 	
 	private int creatorId;
@@ -25,7 +29,7 @@ public class History {
 	
 	private Integer hotDegree;//热度
 	
-	private Integer agree;//赞的个数
+//	private Integer agree;//赞的个数
 	
 	private String historyLogoPath;//图标的静态地址
 	
@@ -79,13 +83,6 @@ public class History {
 		this.hotDegree = hotDegree;
 	}
 
-	public Integer getAgree() {
-		return agree;
-	}
-
-	public void setAgree(Integer agree) {
-		this.agree = agree;
-	}
 
 	public String getHistoryLogoPath() {
 		return historyLogoPath;
@@ -105,6 +102,12 @@ public class History {
 
 
 	
-	
+	public Integer getDomainId() {
+		return domainId;
+	}
+
+	public void setDomainId(Integer domainId) {
+		this.domainId = domainId;
+	}
 	
 }

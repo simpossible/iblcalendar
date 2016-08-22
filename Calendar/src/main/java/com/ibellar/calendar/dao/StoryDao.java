@@ -1,5 +1,7 @@
 package com.ibellar.calendar.dao;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -82,11 +84,12 @@ public class StoryDao {
 	 * 获取热度story
 	 */
 	
-	public List<Story> queryStoryOrderByHotdegree(Integer start,Integer length) {
-		String hql = "from Story as story order by story.hotDegree desc";
+	public List<Object> queryStoryOrderByHotdegree(Integer start,Integer length) {
+		String hql = "select story,h,d from Story as story ,History as h ,Domain as d where h.historyId=story.historyId and d.domainId=h.domainId";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setFirstResult(start);
 		query.setMaxResults(length);
+	
 		return query.list();
 	}
 	
