@@ -93,9 +93,20 @@ public class StoryDao {
 		return query.list();
 	}
 	
+	//获取一个
+	public List<Object> queryMyStory(Integer start,Integer length,Integer uid) {
+		String hql = "select story,h,d,at from Story as story ,History as h,Attention as at,Domain as d where h.historyId=story.historyId and d.domainId=h.domainId and at.userId=uid and at.historyId=h.historyId";
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setFirstResult(start);
+		query.setMaxResults(length);
+	
+		return query.list();
+	}
+	
 	public Integer queryTotalNumberOfStory() {
 		String hql = "select count(*) from Story as story";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		return  ((Number)query.uniqueResult()).intValue();
 	}
+
 }

@@ -30,6 +30,7 @@ public class AttentionController {
 	@Autowired
 	private AttentiontionService attentionService;
 
+	//增加一条关注
 	@RequestMapping(value = "/attention/attention", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String AttentionAHistory(@ModelAttribute("attention") Attention attention, HttpServletRequest request) {
@@ -39,7 +40,7 @@ public class AttentionController {
 		Map<String, Object> map = new HashMap<String, Object>();
 
 		try {
-			if (uid == 0) {
+			if (uid == 0 && attention.getHistoryId() >0) {
 				throw new IBLException(IBLErrorCode.AUTHORY_EOORY);
 			} else {
 				attention.setUserId(uid);

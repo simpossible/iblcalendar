@@ -81,6 +81,7 @@ public class StoryController {
 		return gson.toJson(map);
 	}
 	
+	//获取主页的最新的一些故事 未登录的时候
 	@RequestMapping(value = "/story/hotStory", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String getHotStory(HttpServletRequest request) {
@@ -88,7 +89,7 @@ public class StoryController {
 		Integer length = Integer.parseInt(request.getParameter("length"));
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-				List<HashMap> list = storyService.gethotStory(start, length);
+			List<HashMap> list = storyService.getMyStorys(start, length, -1);
 				map.put("code", IBLErrorCode.ALL_OK);
 				map.put("result", list);
 		} catch (IBLException e) {
@@ -100,6 +101,26 @@ public class StoryController {
 		return new Gson().toJson(map);
 	}
 	
+	@RequestMapping(value = "/story/myStorys", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public String getMyStory(HttpServletRequest request) {
+		Integer start = Integer.parseInt(request.getParameter("start"));
+		Integer length = Integer.parseInt(request.getParameter("length"));
+		String token = request.getParameter(IBLDefine.Token_key);
+		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+				List<HashMap> list = storyService.getMyStorys(start, length, uid);
+				map.put("code", IBLErrorCode.ALL_OK);
+				map.put("result", list);
+		} catch (IBLException e) {
+			map.put("code", e.getErrorcode());
+			map.put("error", e.getErrorMessage());
+			return new Gson().toJson(map);
+			// TODO: handle exception
+		}
+		return new Gson().toJson(map);
+	}
 	@RequestMapping(value = "/story/createStory", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String savaStory(@ModelAttribute("story")Story story, HttpServletRequest request,HttpServletResponse response) {
