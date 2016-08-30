@@ -6,7 +6,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(uniqueConstraints = {@UniqueConstraint(columnNames={"uid","StoryId"})})
 public class Comment {
 	@Id
 	public Integer commentId;
@@ -49,6 +48,14 @@ public class Comment {
 
 	public void setCommentText(String commentText) {
 		this.commentText = commentText;
+	}
+
+	public Integer getAplyUid() {
+		return aplyUid;
+	}
+
+	public void setAplyUid(Integer aplyUid) {
+		this.aplyUid = aplyUid;
 	}
 	
 
