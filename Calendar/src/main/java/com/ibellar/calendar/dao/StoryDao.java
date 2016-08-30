@@ -89,16 +89,24 @@ public class StoryDao {
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setFirstResult(start);
 		query.setMaxResults(length);
-	
 		return query.list();
 	}
 	
 	//获取一个
-	public List<Object> queryMyStory(Integer start,Integer length,Integer uid) {
-		String hql = "select story,h,d,at from Story as story ,History as h,Attention as at,Domain as d where h.historyId=story.historyId and d.domainId=h.domainId and at.userId=uid and at.historyId=h.historyId";
+	public List<Object> queryAttentionStory(Integer start,Integer length,Integer uid) {
+//		String hql = "select big.*,attention.attentionId from (select story.*, h.historyName, d.domainName from Story as story,History as h,Domain as d where h.historyId=story.historyId and d.domainId=h.domainId) as big left join Attention as attention on (big.historyId = attention.historyId  and attention.userId =?)";
+//		String hqla = "select select story as ,history,domain from Story as story, History as history, Domain as domain where history.historyId=story.historyId and domain.domainId=history.domainId";
+//		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
+		String hql = "select story,history,domain,user from Story as story "
+				+ "inner join History as history with history.historyId=story.historyId "
+				+ "inner join Domain as domain with domain.domainId=history.domainId "
+				+ "inner join IBLUser as user with user.uid=story.creatorId";
+//			
+//		Query query = sessionFactory.getCurrentSession().createSQLQuery(hql);
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
-		query.setFirstResult(start);
-		query.setMaxResults(length);
+//		query.setParameter(0, uid);
+//		query.setFirstResult(start);
+//		query.setMaxResults(length);
 	
 		return query.list();
 	}

@@ -38,8 +38,6 @@ public class Attention {
 		return historyId;
 	}
 
-
-
 	public int getUserId() {
 		return userId;
 	}

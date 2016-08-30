@@ -17,6 +17,7 @@ import com.ibellar.calendar.dao.StoryDao;
 import com.ibellar.calendar.entity.Attention;
 import com.ibellar.calendar.entity.Domain;
 import com.ibellar.calendar.entity.History;
+import com.ibellar.calendar.entity.IBLUser;
 import com.ibellar.calendar.entity.Story;
 
 @Transactional
@@ -118,7 +119,7 @@ public class StoryService {
 
 			List<Object> origin;
 			if (uid>0) {
-				origin = storydao.queryMyStory(start, length, uid);
+				origin = storydao.queryAttentionStory(start, length, uid);
 			}else {
 				origin = storydao.queryStoryOrderByHotdegree(start, length);
 			}
@@ -144,12 +145,11 @@ public class StoryService {
 				map.put("domainId", dom.getDomainId());
 				map.put("domainName", dom.getDomainName());
 				
-				Attention attention;
+				IBLUser user;
 				if (a.length >=4) {
-					attention = (Attention)a[3];
-					map.put("attentionId", attention.getAttentionId());
+					user = (IBLUser)a[3];
+					map.put("creatorName", user.getEmail());
 				}
-
 				result.add(map);
 			}
 

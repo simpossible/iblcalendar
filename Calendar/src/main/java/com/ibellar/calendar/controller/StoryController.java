@@ -43,7 +43,7 @@ public class StoryController {
 			if (token == null || uid == 0) {
 				throw new IBLException(IBLErrorCode.AUTHORY_EOORY);
 			} else {
-				List<Story> list = storyService.getStoryOfUser(uid, start, length);
+				List<HashMap> list = storyService.getMyStorys(start, length,uid);
 				map.put("code", IBLErrorCode.ALL_OK);
 				map.put("result", list);
 			}

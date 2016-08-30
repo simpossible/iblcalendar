@@ -35,7 +35,7 @@ public class AttentionController {
 	@ResponseBody
 	public String AttentionAHistory(@ModelAttribute("attention") Attention attention, HttpServletRequest request) {
 
-		String token = request.getHeader(IBLDefine.Token_key);
+		String token = request.getParameter(IBLDefine.Token_key);
 		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Map<String, Object> map = new HashMap<String, Object>();
 
@@ -64,7 +64,7 @@ public class AttentionController {
 	@RequestMapping(value = "/attention/cancelAttention", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String cancelAttention(HttpServletRequest request) {
-		String token = request.getHeader(IBLDefine.Token_key);
+		String token = request.getParameter(IBLDefine.Token_key);
 		Integer uid = ((Number)IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 
 		Integer historyId = Integer.parseInt(request.getParameter("historyId"));
@@ -85,7 +85,7 @@ public class AttentionController {
 	@RequestMapping(value = "/attention/attentionCount", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String attentionNumber(HttpServletRequest request) {
-		String token = request.getHeader(IBLDefine.Token_key);
+		String token = request.getParameter(IBLDefine.Token_key);
 		Integer uid = Integer.parseInt((String) IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key));
 
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -105,7 +105,7 @@ public class AttentionController {
 	@RequestMapping(value = "/attention/attentions", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
 	public String attentionHistorys(HttpServletRequest request) {
-		String token = request.getHeader(IBLDefine.Token_key);
+		String token = request.getParameter(IBLDefine.Token_key);
 		Integer uid = ((Number) IBLTokenUtil.getvalueFromTokenWithKey(token, IBLDefine.Uid_Key)).intValue();
 		Integer start = Integer.parseInt(request.getParameter("start"));
 		Integer length = Integer.parseInt(request.getParameter("length"));
