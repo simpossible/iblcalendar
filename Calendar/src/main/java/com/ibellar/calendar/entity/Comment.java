@@ -16,7 +16,9 @@ public class Comment {
 	
 	public String commentText;
 	
-	public Integer aplyUid;//是否是回复的他人的uid
+	public Integer applyUid;//是否是回复的他人的uid
+	
+	public Integer createTime;
 
 	public Integer getCommentId() {
 		return commentId;
