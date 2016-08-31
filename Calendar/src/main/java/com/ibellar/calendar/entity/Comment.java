@@ -53,11 +53,11 @@ public class Comment {
 	}
 
 	public Integer getAplyUid() {
-		return aplyUid;
+		return applyUid;
 	}
 
 	public void setAplyUid(Integer aplyUid) {
-		this.aplyUid = aplyUid;
+		this.applyUid = aplyUid;
 	}
 	
 
