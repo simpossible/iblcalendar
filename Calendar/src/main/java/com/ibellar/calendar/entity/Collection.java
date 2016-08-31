@@ -15,6 +15,8 @@ public class Collection {
 	public Integer uid;
 	
 	public Integer storyId;
+	
+	public Integer folderId;//收藏夹的id 属于哪个收藏夹
 
 	public Integer getCollectionId() {
 		return collectionId;
